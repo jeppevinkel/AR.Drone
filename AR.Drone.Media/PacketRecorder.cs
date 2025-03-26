@@ -1,6 +1,4 @@
 ﻿using System.Collections.Concurrent;
-using System.IO;
-using System.Threading;
 using AR.Drone.Infrastructure;
 using AR.Drone.Data;
 
@@ -31,17 +29,14 @@ namespace AR.Drone.Media
         {
             _packetQueue.Flush();
 
-            using (var recorder = new PacketWriter(_stream))
+            using var recorder = new PacketWriter(_stream);
+            while (token.IsCancellationRequested == false)
             {
-                while (token.IsCancellationRequested == false)
+                while (_packetQueue.TryDequeue(out var packet))
                 {
-                    object packet;
-                    while (_packetQueue.TryDequeue(out packet))
-                    {
-                        recorder.WritePacket(packet);
-                    }
-                    Thread.Sleep(1);
+                    recorder.WritePacket(packet);
                 }
+                Thread.Sleep(1);
             }
         }
     }

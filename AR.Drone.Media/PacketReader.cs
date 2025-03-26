@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using AR.Drone.Data;
+﻿using AR.Drone.Data;
 
 namespace AR.Drone.Media
 {
@@ -17,40 +15,41 @@ namespace AR.Drone.Media
 
         public NavigationPacket ReadNavigationPacket()
         {
-            var packet = new NavigationPacket();
-            packet.Timestamp = ReadInt64();
-            int dataSize = ReadInt32();
+            var packet = new NavigationPacket
+            {
+                Timestamp = ReadInt64()
+            };
+            var dataSize = ReadInt32();
             packet.Data = ReadBytes(dataSize);
             return packet;
         }
 
         public VideoPacket ReadVideoPacket()
         {
-            var packet = new VideoPacket();
-            packet.Timestamp = ReadInt64();
-            packet.FrameNumber = ReadUInt32();
-            packet.Height = ReadUInt16();
-            packet.Width = ReadUInt16();
-            packet.FrameType = (VideoFrameType) ReadByte();
-            int dataSize = ReadInt32();
+            var packet = new VideoPacket
+            {
+                Timestamp = ReadInt64(),
+                FrameNumber = ReadUInt32(),
+                Height = ReadUInt16(),
+                Width = ReadUInt16(),
+                FrameType = (VideoFrameType) ReadByte()
+            };
+            var dataSize = ReadInt32();
             packet.Data = ReadBytes(dataSize);
             return packet;
         }
 
-        public object ReadPacket()
+        public object? ReadPacket()
         {
             try
             {
                 PacketType packetType = ReadPacketType();
-                switch (packetType)
+                return packetType switch
                 {
-                    case PacketType.Navigation:
-                        return ReadNavigationPacket();
-                    case PacketType.Video:
-                        return ReadVideoPacket();
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
+                    PacketType.Navigation => ReadNavigationPacket(),
+                    PacketType.Video => ReadVideoPacket(),
+                    _ => throw new ArgumentOutOfRangeException()
+                };
             }
             catch (EndOfStreamException)
             {

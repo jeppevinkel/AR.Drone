@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 
 namespace AR.Drone.Infrastructure
 {
@@ -26,7 +24,7 @@ namespace AR.Drone.Infrastructure
             }
         }
 
-        [DllImport("kernel32", SetLastError = true)]
+        [DllImport("kernel32", SetLastError = true, CharSet = CharSet.Unicode)]
         public static extern bool SetDllDirectory(string lpPathName);
     }
 }

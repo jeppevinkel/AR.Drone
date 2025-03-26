@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using AR.Drone.Data;
+﻿using AR.Drone.Data;
 
 namespace AR.Drone.Media
 {
@@ -12,26 +10,25 @@ namespace AR.Drone.Media
 
         public void WritePacket(object packet)
         {
-            if (packet == null) throw new NullReferenceException();
-
-            if (packet is NavigationPacket)
+            switch (packet)
             {
-                Write(PacketType.Navigation);
+                case null:
+                    throw new NullReferenceException();
+                case NavigationPacket navigationPacket:
+                    Write(PacketType.Navigation);
 
-                var navigationPacket = (NavigationPacket) packet;
-                Write(navigationPacket);
-            }
-            else if (packet is VideoPacket)
-            {
-                Write((byte) PacketType.Video);
+                    Write(navigationPacket);
+                    break;
+                case VideoPacket videoPacket:
+                    Write((byte) PacketType.Video);
 
-                var videoPacket = (VideoPacket) packet;
-                Write(videoPacket);
-            }
-            else
-            {
-                string message = string.Format("Not supported packet type - {0}.", packet.GetType().Name);
-                throw new NotSupportedException(message);
+                    Write(videoPacket);
+                    break;
+                default:
+                {
+                    var message = $"Not supported packet type - {packet.GetType().Name}.";
+                    throw new NotSupportedException(message);
+                }
             }
         }
 

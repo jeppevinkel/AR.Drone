@@ -1,19 +1,14 @@
-﻿using System;
-using System.Diagnostics;
-using System.Threading;
+﻿using System.Diagnostics;
 
 namespace AR.Drone.Infrastructure
 {
     public abstract class WorkerBase : DisposableBase
     {
-        private CancellationTokenSource _cancellationTokenSource;
+        private CancellationTokenSource? _cancellationTokenSource;
 
-        public bool IsAlive
-        {
-            get { return _cancellationTokenSource != null; }
-        }
+        public bool IsAlive => _cancellationTokenSource != null;
 
-        public event Action<Object, Exception> UnhandledException;
+        public event Action<object, Exception>? UnhandledException;
 
         public void Start()
         {
@@ -53,7 +48,7 @@ namespace AR.Drone.Infrastructure
         {
             try
             {
-                CancellationToken token = _cancellationTokenSource.Token;
+                CancellationToken token = _cancellationTokenSource!.Token;
                 Loop(token);
             }
             catch (OperationCanceledException)
@@ -68,9 +63,9 @@ namespace AR.Drone.Infrastructure
             {
                 lock (this)
                 {
-                    CancellationTokenSource cancellationTokenSource = _cancellationTokenSource;
+                    CancellationTokenSource? cancellationTokenSource = _cancellationTokenSource;
                     _cancellationTokenSource = null;
-                    cancellationTokenSource.Dispose();
+                    cancellationTokenSource?.Dispose();
                 }
             }
         }
@@ -87,8 +82,7 @@ namespace AR.Drone.Infrastructure
 
         protected virtual void OnUnhandledException(Exception exception)
         {
-            if (UnhandledException != null)
-                UnhandledException(this, exception);
+            UnhandledException?.Invoke(this, exception);
         }
 
         protected override void DisposeOverride()

@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AR.Drone.Avionics</RootNamespace>
     <AssemblyName>AR.Drone.Avionics</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
+    <LangVersion>default</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -74,13 +75,13 @@
       <Project>{56dbf8e3-28a6-4c27-ba0a-b32352608f44}</Project>
       <Name>AR.Drone.Client</Name>
     </ProjectReference>
-    <ProjectReference Include="..\AR.Drone.Data\AR.Drone.Data.csproj">
+    <ProjectReference Include="..\AR.Drone.Data.Old\AR.Drone.Data.Old.csproj">
       <Project>{7d1b0b10-82f9-413f-bee9-0174753d93a1}</Project>
-      <Name>AR.Drone.Data</Name>
+      <Name>AR.Drone.Data.Old</Name>
     </ProjectReference>
-    <ProjectReference Include="..\AR.Drone.Infrastructure\AR.Drone.Infrastructure.csproj">
+    <ProjectReference Include="..\AR.Drone.Infrastructure.Old\AR.Drone.Infrastructure.Old.csproj">
       <Project>{5be68b3d-1112-464d-8c17-844e834bb3ba}</Project>
-      <Name>AR.Drone.Infrastructure</Name>
+      <Name>AR.Drone.Infrastructure.Old</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
