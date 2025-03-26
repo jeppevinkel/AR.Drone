@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace AR.Drone.Infrastructure
+﻿namespace AR.Drone.Infrastructure
 {
     public abstract class DisposableBase : IDisposable
     {
@@ -8,12 +6,7 @@ namespace AR.Drone.Infrastructure
 
         public void Dispose()
         {
-            Dispose(true);
-        }
-
-        private void Dispose(bool disposing)
-        {
-            if (disposing && _disposed == false)
+            if (_disposed == false)
             {
                 DisposeOverride();
 

@@ -6,7 +6,7 @@ namespace AR.Drone.Infrastructure
     {
         public static void Flush<T>(this ConcurrentQueue<T> queue)
         {
-            T item;
+            T? item;
             while (queue.TryDequeue(out item))
             {
             }
