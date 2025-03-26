@@ -9,10 +9,11 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AR.Drone.WinApp</RootNamespace>
     <AssemblyName>AR.Drone.WinApp</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProductVersion>12.0.0</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
+    <LangVersion>default</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -79,9 +80,9 @@
       <Project>{56DBF8E3-28A6-4C27-BA0A-B32352608F44}</Project>
       <Name>AR.Drone.Client</Name>
     </ProjectReference>
-    <ProjectReference Include="..\AR.Drone.Data\AR.Drone.Data.csproj">
-      <Project>{7D1B0B10-82F9-413F-BEE9-0174753D93A1}</Project>
-      <Name>AR.Drone.Data</Name>
+    <ProjectReference Include="..\AR.Drone.Data.Old\AR.Drone.Data.Old.csproj">
+      <Project>{7d1b0b10-82f9-413f-bee9-0174753d93a1}</Project>
+      <Name>AR.Drone.Data.Old</Name>
     </ProjectReference>
     <ProjectReference Include="..\AR.Drone.Infrastructure\AR.Drone.Infrastructure.csproj">
       <Project>{5BE68B3D-1112-464D-8C17-844E834BB3BA}</Project>
